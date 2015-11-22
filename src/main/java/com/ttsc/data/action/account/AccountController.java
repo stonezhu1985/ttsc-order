@@ -620,6 +620,10 @@ public class AccountController extends BaseController {
 				rs.setCode("1");
 				return rs;
 			}
+			
+			if(StringUtils.isEmpty(validCode)){
+				validCode = "0";
+			}
 
 			UserShopBindInfo userShopBindInfo = new UserShopBindInfo();
 			userShopBindInfo.setUserId(userId);
@@ -639,9 +643,9 @@ public class AccountController extends BaseController {
 			List<UserShopBindInfo> list = userShopBindService.getUserShopBindList(userId);
 			rs.setSingleResult(list);
 		} catch (Exception e) {
-			logger.info("系统异常，账户退出失败!" + e.getMessage());
+			logger.info("系统异常，绑定商铺失败!" + e.getMessage());
 			e.printStackTrace();
-			rs.setMessage("系统异常，账户退出失败!");
+			rs.setMessage("系统异常，绑定商铺失败!");
 			rs.setCode("1");
 			return rs;
 		}
