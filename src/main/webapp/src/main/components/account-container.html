@@ -41,7 +41,7 @@
             main.get(main.action.getProvinceList, {},function(data){
                 $("#provinces").html("<option value=''>请选择省份</option>");
                 $.each(data.singleResult, function(i, item) {
-                    $("#provinces").append("<option value='" + item.id + "'>" + item.name + "</option>");
+                    $("#provinces").append("<option value='" + item.id + "'>" + item.provinceName + "</option>");
                 });
             });
 
@@ -49,16 +49,16 @@
                 main.get(main.action.getCityList, {"provinceId" : e.target.value}, function(data){
                     $("#citys").html("<option value=''>请选择市</option>");
                     $.each(data.singleResult, function(i, item) {
-                        $("#citys").append("<option value='" + item.id + "'>" + item.name + "</option>");
+                        $("#citys").append("<option value='" + item.id + "'>" + item.cityName + "</option>");
                     });
                 });
             });
 
             $("#citys").change(function(e) {
-                main.get(main.action.getCityList, {"cityId" : e.target.value}, function(data){
+                main.get(main.action.getTownList, {"cityId" : e.target.value}, function(data){
                     $("#countys").html("<option value=''>请选择县</option>");
                     $.each(data.singleResult, function(i, item) {
-                        $("#countys").append("<option value='" + item.id + "'>" + item.name + "</option>");
+                        $("#countys").append("<option value='" + item.id + "'>" + item.townName + "</option>");
                     });
                 });
             });

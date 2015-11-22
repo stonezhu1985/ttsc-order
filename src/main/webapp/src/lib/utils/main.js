@@ -14,7 +14,7 @@ main.getRootUrl = function () {
     var pathName = window.location.pathname.substring(1);
     var webName = pathName == '' ? '' : pathName.substring(0, pathName.indexOf('/'));
 
-    return window.location.protocol + '//' + window.location.host + '/order/';
+    return window.location.protocol + '//' + window.location.host + '/';
 }
 
 main.base_url = main.getRootUrl();
@@ -34,7 +34,7 @@ main.action = {
     /** 获取手机验证码 */
     updateAccountPwd: 'account/updateAccountPwd',
     /** 获取当前用户对应的天猫，和京东等商家信息 */
-    getCustomerShopInfo: 'account/getCustomerShopInfo',
+    getCheckedShop: 'account/getCheckedShop',
 
     /** 获取绑定商铺 */
     bindShop: 'account/bindShop',
