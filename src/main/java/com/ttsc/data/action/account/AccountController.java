@@ -641,6 +641,13 @@ public class AccountController extends BaseController {
 			userShopBindService.saveUserShopBind(userShopBindInfo);
 			
 			List<UserShopBindInfo> list = userShopBindService.getUserShopBindList(userId);
+			if(list != null){
+				UserShopBindInfo bindInfo = null;
+				for(int i=0;i<list.size();i++){
+					bindInfo = list.get(i);
+					bindInfo.setPlatName(Constant.getPlatName(bindInfo.getPlatId()+""));
+				}
+			}
 			rs.setSingleResult(list);
 		} catch (Exception e) {
 			logger.info("系统异常，绑定商铺失败!" + e.getMessage());
