@@ -12,6 +12,7 @@ public class UserShopBindInfo {
 	private int id;
 	private int userId;//用户ID
 	private int platId;// 平台
+	private String platName;
 	private String shopName;// 商铺名称
 	private String linkUrl;// 店铺首页链接地址
 	private String wwId;// 旺旺ID
@@ -152,5 +153,13 @@ public class UserShopBindInfo {
 
 	public void setValidCode(String validCode) {
 		this.validCode = validCode;
+	}
+
+	public String getPlatName() {
+		return platName;
+	}
+
+	public void setPlatName(String platName) {
+		this.platName = platName;
 	}
 }

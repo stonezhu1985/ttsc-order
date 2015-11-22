@@ -640,6 +640,7 @@ public class AccountController extends BaseController {
 			rs.setSingleResult(list);
 		} catch (Exception e) {
 			logger.info("系统异常，账户退出失败!" + e.getMessage());
+			e.printStackTrace();
 			rs.setMessage("系统异常，账户退出失败!");
 			rs.setCode("1");
 			return rs;
@@ -671,7 +672,13 @@ public class AccountController extends BaseController {
 			int userId = account.getId();
 			
 			List<UserShopBindInfo> list = userShopBindService.getUserShopBindList(userId);
-			
+			if(list != null){
+				UserShopBindInfo bindInfo = null;
+				for(int i=0;i<list.size();i++){
+					bindInfo = list.get(i);
+					bindInfo.setPlatName(Constant.getPlatName(bindInfo.getPlatId()+""));
+				}
+			}
 			AccountPo po = new AccountPo();
 			po.setId(account.getId());
 			po.setTelephone(account.getTelephone());
