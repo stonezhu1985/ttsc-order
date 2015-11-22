@@ -156,14 +156,18 @@ main.toUrl = function(url){
 
 main.ajaxMsg = function(rep, url){
     if(rep && rep.code == 0){
-        main.alert.success(rep.message);
+        if(rep.message){
+            main.alert.success(rep.message);
+        }
         if(url){
             setTimeout(function(){
                 window.location.href = main.base_url + url;
             },3000);
         }
     }else if(rep && rep.code == 1){
-        main.alert.error(rep.message);
+        if(rep.message){
+            main.alert.error(rep.message);
+        }
     }
 }
 
@@ -259,6 +263,7 @@ main.ajax = function (type, address, data, callBack) {
 
 main.post = function(address, data, callBack){
     try{
+       // main.progressStart();
         main.ajax("POST", address, data, callBack);
     }catch(e){
     }finally{
@@ -269,6 +274,7 @@ main.post = function(address, data, callBack){
 
 main.get = function(address, data, callBack){
     try{
+       // main.progressStart();
         main.ajax("GET", address, data, callBack);
     }catch(e){
     }finally{
@@ -345,7 +351,19 @@ DataUtil.urlGet = function() {
     }
     return aGET;
 }
-/****************************  DataUtil end  ****************************/
+
+/**
+ * 产生随机数
+ * @param index
+ */
+DataUtil.mathRand = function (index) {
+    var num = "";
+    for (var i = 0; i < index; i++) {
+        num += Math.floor(Math.random() * 10);
+    }
+    return num;
+}
+    /****************************  DataUtil end  ****************************/
 /****************************** Radio bin ******************************/
 /**
  * 创建Radio bootstrap

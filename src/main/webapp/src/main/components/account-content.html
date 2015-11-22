@@ -8,7 +8,7 @@
             <td>
                 <select class="select sel-plat"
                         style="margin-top: 1px;margin-bottom: 1px;*position: relative;*top: 2px;width:97px;height: 20px;"
-                        id="s_type" name="s_type" onchange="changetype(this)">
+                        id="platId" name="platId" onchange="changetype(this)">
                     <option value="0">请选择...</option>
                     <option value="1">淘宝网</option>
                     <option value="2">京东</option>
@@ -19,33 +19,33 @@
         <tr>
             <td style="text-align:right;">店铺名称：</td>
             <td>
-                <input type="text" name="shopname" id="shopname">
+                <input type="text" name="shopName" id="shopName">
             </td>
             <td></td>
         </tr>
         <tr>
             <td style="text-align:right;">店铺首页网址：</td>
-            <td><input type="text" name="shopurl" id="shopurl"></td>
+            <td><input type="text" name="linkUrl" id="linkUrl"></td>
             <td></td>
         </tr>
         <tr>
             <td style="text-align:right;">店铺主旺旺ID：</td>
-            <td><input type="text" name="tbuser" id="tbuser"></td>
+            <td><input type="text" name="wwId" id="wwId"></td>
             <td></td>
         </tr>
         <tr>
             <td style="text-align:right;">发件地址：</td>
             <td rowspan="2">
                 省份：
-                <select id="provinces" style="width: 100px">
+                <select id="province" style="width: 100px">
                     <option value="">请选择省份</option>
                 </select>
                 市：
-                <select id="citys" style="width: 100px">
+                <select id="city" style="width: 100px">
                     <option value="">请选择市</option>
                 </select>
                 县：
-                <select id="countys" style="width: 100px">
+                <select id="town" style="width: 100px">
                     <option value="">请选择县</option>
                 </select>
             </td>

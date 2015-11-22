@@ -57,6 +57,9 @@
         showLoading:{
             css:'showLoading/css/showLoading.css',
             js:'showLoading/js/jquery.showLoading.min.js'
+        },
+        taskContainer:{
+            js:'components/task-container.js'
         }
     };
 

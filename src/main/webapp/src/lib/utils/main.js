@@ -2,7 +2,8 @@
  * 当前版本
  * @type {string}
  */
-;var version = "0.1.1";
+;
+var version = "0.1.1";
 
 var main = main || {};
 
@@ -39,7 +40,7 @@ main.action = {
     /** 获取绑定商铺 */
     bindShop: 'account/bindShop',
     /** 增加绑定商铺
-    addbindShop: 'account/addbindShop',**/
+     addbindShop: 'account/addbindShop',**/
     /** 获取账号信息 */
     getAccountInfo: 'account/getAccountInfo',
     /** 获取省份信息列表 */
@@ -62,56 +63,56 @@ main.herf = {
 }
 
 main.accountInfo = {
-    title : {
-        platId : '平台',
-        validCode : '校验码',
-        shopName : '店铺名称',
-        linkUrl : '店铺商品校验链接',
-        wwId : '店铺主旺旺ID',
-        province : '省份',
-        city:'城市',
-        town:'区县'
+    title: {
+        platName: '平台',
+        validCode: '校验码',
+        shopName: '店铺名称',
+        linkUrl: '店铺商品校验链接',
+        wwId: '店铺主旺旺ID',
+        provinceName: '省份',
+        cityName: '城市',
+        townName: '区县'
     }
 }
 
 main.modules = {
-    login:{
-        navbar :  'components/main-navbar.html',
-        subhead : 'components/main-subhead.html'
+    login: {
+        navbar: 'components/main-navbar.html',
+        subhead: 'components/main-subhead.html'
     },
-    taskBase : {
-        sidebar : 'components/main-sidebar.html',
-        footer : 'components/task-footer.html',
-        navbar :  'components/main-navbar.html',
-        subhead : 'components/main-subhead.html'
+    taskBase: {
+        sidebar: 'components/main-sidebar.html',
+        footer: 'components/task-footer.html',
+        navbar: 'components/main-navbar.html',
+        subhead: 'components/main-subhead.html'
     },
-    tasks :{
-        container:'components/task-container.html'
+    tasks: {
+        container: 'components/task-container.html'
     },
-    accountInfo:{
-        container:'components/account-container.html',
-        content:'components/account-content.html'
+    accountInfo: {
+        container: 'components/account-container.html',
+        content: 'components/account-content.html'
     }
 }
 
 main.navigation = {
-    releaseTask : function(){
+    releaseTask: function () {
         $('#container').load(main.modules.tasks.container);
     },
-    task : function(){
+    task: function () {
         $('#container').load(main.modules.tasks.container);
     },
-    accountInfo : function(){
+    accountInfo: function () {
         $('#container').load(main.modules.accountInfo.container);
     },
-    resetPwd : function(){
+    resetPwd: function () {
         main.toUrl(main.herf.resetPwd)
     }
 }
 
 main.validator = {
-    int6 : [/^\d{6}$/, '请输入6位数字'],
-    telephone : [/^0?(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/, '请输入正确的手机号']
+    int6: [/^\d{6}$/, '请输入6位数字'],
+    telephone: [/^0?(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/, '请输入正确的手机号']
 };
 
 
