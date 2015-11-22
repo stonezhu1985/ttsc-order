@@ -5,11 +5,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -51,7 +54,7 @@ public class AreaController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "getProvinceList", method = {RequestMethod.GET})
+	@RequestMapping(value = "getProvinceList", method=RequestMethod.POST, headers = {"content-type=application/json","content-type=application/xml"})
 	@ResponseBody
 	public BasicResult<List<ProvinceInfo>> getProvinceList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -61,6 +64,7 @@ public class AreaController extends BaseController {
 			rs.setSingleResult(list);
 		} catch (Exception e) {
 			logger.info("系统异常，获取省份信息列表失败!" + e.getMessage());
+			e.printStackTrace();
 			rs.setMessage("系统异常，获取省份信息列表失败!");
 			rs.setCode("1");
 			return rs;
@@ -76,14 +80,14 @@ public class AreaController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "getCityList", method = {RequestMethod.GET})
+	@RequestMapping(value = "getCityList", method=RequestMethod.POST, headers = {"content-type=application/json","content-type=application/xml"})
 	@ResponseBody
-	public BasicResult<List<CityInfo>> getCityList(HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public BasicResult<List<CityInfo>> getCityList(HttpServletRequest request,@RequestBody String info) throws Exception {
 		BasicResult<List<CityInfo>> rs = new BasicResult<List<CityInfo>>();
 		try {
-			String provinceId = request.getParameter("provinceId");
-			if(StringUtils.isEmpty(provinceId)){
+			JSONObject obj = JSONObject.fromObject(info);
+			String provinceId = obj.getString("provinceId");
+			if(StringUtils.isEmpty(obj.getString("provinceId"))){
 				rs.setMessage("省份信息不能为空!");
 				rs.setCode("1");
 				return rs;
@@ -92,6 +96,7 @@ public class AreaController extends BaseController {
 			rs.setSingleResult(list);
 		} catch (Exception e) {
 			logger.info("系统异常，获取城市信息列表失败!" + e.getMessage());
+			e.printStackTrace();
 			rs.setMessage("系统异常，获取城市信息列表失败!");
 			rs.setCode("1");
 			return rs;
@@ -107,13 +112,13 @@ public class AreaController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "getTownList", method = {RequestMethod.GET})
+	@RequestMapping(value = "getTownList", method=RequestMethod.POST, headers = {"content-type=application/json","content-type=application/xml"})
 	@ResponseBody
-	public BasicResult<List<TownInfo>> getTownList(HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public BasicResult<List<TownInfo>> getTownList(HttpServletRequest request,@RequestBody String info) throws Exception {
 		BasicResult<List<TownInfo>> rs = new BasicResult<List<TownInfo>>();
 		try {
-			String cityId = request.getParameter("cityId");
+			JSONObject obj = JSONObject.fromObject(info);
+			String cityId = obj.getString("cityId");
 			if(StringUtils.isEmpty(cityId)){
 				rs.setMessage("城市信息不能为空!");
 				rs.setCode("1");
@@ -123,6 +128,7 @@ public class AreaController extends BaseController {
 			rs.setSingleResult(list);
 		} catch (Exception e) {
 			logger.info("系统异常，获取区县信息列表失败!" + e.getMessage());
+			e.printStackTrace();
 			rs.setMessage("系统异常，获取区县信息列表失败!");
 			rs.setCode("1");
 			return rs;

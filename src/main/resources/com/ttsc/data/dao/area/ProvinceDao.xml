@@ -4,7 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ttsc.data.dao.area.ProvinceDao">
 
-    <select id="getTownList" resultType="ProvinceInfo">
+    <select id="getProvinceList" resultType="ProvinceInfo">
         select 
         	serialId id,
         	concat(IFNULL(provinceName,''),IFNULL(provinceType,'')) provinceName 
