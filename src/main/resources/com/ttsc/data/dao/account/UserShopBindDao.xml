@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ttsc.data.dao.account.UserShopBindDao">
+	
+	<insert id="saveUserShopBind" parameterType="UserShopBindInfo">
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		 insert into
+		 user_shop_bind(user_id,plat_id,shop_name,link_url,valid_code,ww_id,province,city,town,status,create_time) 
+		 values(#{userId},#{platId},#{shopName},#{linkUrl},#{validCode},#{wwId},#{province},#{city},#{town},#{status},#{createTime})
+	</insert>
+    
+    <select id="getUserShopBindList" parameterType="int" resultType="UserShopBindInfo">
+        select 
+        	t1.id,
+        	t1.user_id userId,
+        	t1.plat_id platId,
+        	t1.shop_name shopName,
+        	t1.link_url linkUrl,
+        	t1.valid_code validCode,
+        	t1.ww_id wwId,
+        	t1.province,
+        	t1.city,
+        	t1.town,
+        	t1.status,
+			concat(IFNULL(t2.provinceName,''),IFNULL(t2.provinceType,'')) provinceName,
+			concat(IFNULL(t3.cityName,''),IFNULL(t3.cityType,'')) cityName ,
+			concat(IFNULL(t4.districtName,''),IFNULL(t4.districtType,'')) townName
+ 		from  
+ 			user_shop_bind t1
+		left join 
+			fch_province t2 on t1.province = t2.serialId
+		left join 
+			fch_city t3 on t1.city = t3.serialId
+		left join 
+			fch_district t4 on t1.town = t4.serialId
+        where 
+        	t1.user_id = #{userId}
+        order by t1.id
+    </select>
+    
+    <select id="getPassedUserShopBindList" parameterType="int" resultType="UserShopBindInfo">
+        select 
+        	id,
+        	plat_id platId,
+        	shop_name shopName
+ 		from  
+ 			user_shop_bind 
+        where 
+        	user_id = #{userId}
+        order by id
+    </select>
+    
+</mapper>

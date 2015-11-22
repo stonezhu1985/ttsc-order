@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ttsc.data.dao.task.TaskDao">
+
+    <select id="getTaskByShopIdList" parameterType="int" resultType="Task">
+        select 
+        	id id,
+        	user_shop_bind_id userShopBindId,
+        	commodity_name commodityName,
+        	commodity_href commodityHref,
+        	commodity_photo commodityPhoto,
+        	commodity_address commodityAddress,
+        	max_price maxPrice,
+        	min_price minPrice,
+        	free_shipping freeShipping,
+        	commodity_price commodityPrice,
+        	order_have_commodity_num orderHaveCommodityNum,
+        	is_straight_train_task isStraightTrainTask,
+        	order_num orderNum,
+        	key_words_count keyWordsCount,
+        	message message,
+        	note note,
+        	characteristic_message characteristicMessage,
+        	extended_period extendedPeriod,
+        	the_next_task_two theNextTaskTwo,
+        	the_next_task_five theNextTaskFive,
+        	guarantee_ratio guaranteeRatio,
+        	repeat_customers_ratio repeatCustomersRatio,
+        	sex sex,
+        	age age,
+        	flower flower,
+        	task_queue taskQueue,
+        	strong_single_buyer strongSingleBuyer,
+        	grab_single_tip grabSingletip,
+        	task_type taskType,
+        	terminal terminal,
+        	create_time createTime,
+        	status status,
+        	user_shop_id userShopId
+        from 
+        	task 
+        where  
+        	user_shop_id = #{userShopId}
+    </select>
+    
+    <insert id="saveTask" parameterType="Task">
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		 insert into
+		 task(user_shop_bind_id,
+        	commodity_name ,
+        	commodity_href ,
+        	commodity_photo ,
+        	commodity_address ,
+        	max_price ,
+        	min_price ,
+        	free_shipping ,
+        	commodity_price ,
+        	order_have_commodity_num ,
+        	is_straight_train_task ,
+        	order_num ,
+        	key_words_count ,
+        	message ,
+        	note ,
+        	characteristic_message ,
+        	extended_period ,
+        	the_next_task_two ,
+        	the_next_task_five ,
+        	guarantee_ratio ,
+        	repeat_customers_ratio,
+        	sex,
+        	age ,
+        	flower,
+        	task_queue ,
+        	strong_single_buyer ,
+        	grab_single_tip ,
+        	task_type ,
+        	terminal ,
+        	create_time ,
+        	status ,
+        	user_shop_id ) 
+		 values(#{userShopBindId},#{commodityName},#{commodityHref},#{commodityPhoto},
+		 #{commodityAddress},#{maxPrice},#{minPrice},#{freeShipping},
+		 #{commodityPrice},#{orderHaveCommodityNum},#{isStraightTrainTask},#{orderNum},
+		 #{keyWordsCount},#{message},#{note},#{characteristicMessage},
+		 #{extendedPeriod},#{theNextTaskTwo},#{theNextTaskFive},#{guaranteeRatio},
+		 #{repeatCustomersRatio},#{sex},#{age},#{flower},#{taskQueue},#{strongSingleBuyer},
+		 #{grabSingletip},#{taskType},#{terminal},#{createTime},#{status},#{userShopId}
+		 )
+	</insert>
+	
+</mapper>

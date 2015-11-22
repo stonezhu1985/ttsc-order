@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ttsc.data.dao.task.TaskAdditionalProductDetailDao">
+
+    <select id="getTaskKeyWordDetailByTaskId" parameterType="int" resultType="TaskKeyWordDetail">
+        select 
+        	id id,
+        	key_word keyWord,
+        	order_num orderNum,
+        	rate rate,
+        	b_c_purchase_num bcPurchaseNum,
+        	task_id taskId
+        from 
+        	task_key_word_detail 
+        where  
+        	task_id = #{taskId}
+    </select>
+    
+    <insert id="saveTaskKeyWordDetail" parameterType="TaskKeyWordDetail">
+		 insert into
+		 task_additional_product_detail(key_word,
+        	order_num ,
+        	rate ,
+        	b_c_purchase_num ,
+        	task_id) 
+		 values(#{keyWord},#{orderNum},#{rate},#{bcPurchaseNum},
+		 #{taskId})
+	</insert>
+	
+</mapper>

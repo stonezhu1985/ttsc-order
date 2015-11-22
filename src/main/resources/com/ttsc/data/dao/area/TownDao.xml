@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ttsc.data.dao.area.TownDao">
+
+    <select id="getTownList" parameterType="int" resultType="TownInfo">
+        select 
+        	serialId id,
+        	districtUpIdNum cityId,
+        	concat(IFNULL(districtName,''),IFNULL(districtType,'')) townName 
+        from 
+        	fch_district 
+        where  
+        	districtUpIdNum = #{cityId}
+    </select>
+    
+</mapper>

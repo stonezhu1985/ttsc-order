@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ttsc.data.dao.task.TaskKeyWordDetailDao">
+
+    <select id="getTaskAdditionalProductDetailByTaskId" parameterType="int" resultType="TaskAdditionalProductDetail">
+        select 
+        	id id,
+        	commodity_photo commodityPhoto,
+        	commodity_href commodityHref,
+        	commodity_price commodityPrice,
+        	commodity_order_num commodityOorderNum,
+        	task_id taskId
+        from 
+        	task_additional_product_detail 
+        where  
+        	task_id = #{taskId}
+    </select>
+    
+    <insert id="saveTaskAdditionalProductDetail" parameterType="TaskAdditionalProductDetail">
+		 insert into
+		 task_additional_product_detail(commodity_photo,
+        	commodity_href ,
+        	commodity_price ,
+        	commodity_order_num ,
+        	task_id) 
+		 values(#{commodityPhoto},#{commodityHref},#{commodityPrice},#{commodityOorderNum},
+		 #{taskId})
+	</insert>
+	
+</mapper>

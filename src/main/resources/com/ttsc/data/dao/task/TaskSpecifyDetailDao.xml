@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ttsc.data.dao.task.TaskSpecifyDetailDao">
+
+    <select id="getTaskSpecifyDetailByTaskId" parameterType="int" resultType="TaskSpecifyDetail">
+        select 
+        	id id,
+        	type type,
+        	first first,
+        	second second,
+        	third third,
+        	four four,
+        	five five,
+        	praise praise,
+        	task_id taskId
+        from 
+        	task_specify_detail 
+        where  
+        	task_id = #{taskId}
+    </select>
+    
+    <insert id="saveTaskSpecifyDetail" parameterType="TaskSpecifyDetail">
+		 insert into
+		 task_specify_detail(type,
+        	first ,
+        	second ,
+        	third ,
+        	four,
+        	five five,
+        	praise praise,
+        	task_id) 
+		 values(#{type},#{first},#{second},#{third},#{four},#{five},#{praise},
+		 #{taskId})
+	</insert>
+	
+</mapper>

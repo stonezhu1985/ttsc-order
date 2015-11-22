@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ttsc.data.dao.account.InvitationCodeDao">
+	
+	<insert id="saveInvitationCode" parameterType="InvitationCode">
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		 insert into
+		 invitation_code(user_id,type,code) 
+		 values(#{userId},#{type},#{code})
+	</insert>
+    
+    <select id="findInvitationByInvitationCode" parameterType="string" resultType="InvitationCode">
+        select 
+        	id id,user_id userId,
+        	type type,code code
+        from  
+        	invitation_code 
+        where 
+        	code = #{code}
+        limit 1;
+    </select>
+    
+     <select id="findMaxInvitationCode" resultType="int">
+        select 
+        	IFNULL(max(code),0) code
+        from  
+        	invitation_code 
+    </select>
+    
+    
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ttsc.data.dao.task.TaskEmptyPacketServiceDetailDao">
+
+    <select id="getTaskEmptyPacketServiceDetailByTaskId" parameterType="int" resultType="TaskEmptyPacketServiceDetail">
+        select 
+        	id id,
+        	package_weight packageWeight,
+        	dot_number dotNumber,
+        	task_id taskId
+        from 
+        	task_empty_packet_service_detail 
+        where  
+        	task_id = #{taskId}
+    </select>
+    
+    <insert id="saveTaskEmptyPacketServiceDetail" parameterType="TaskEmptyPacketServiceDetail">
+		 insert into
+		 task_empty_packet_service_detail(package_weight,
+        	dot_number ,
+        	task_id) 
+		 values(#{packageWeight},#{dotNumber},#{taskId})
+	</insert>
+	
+</mapper>

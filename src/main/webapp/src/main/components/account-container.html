@@ -1,0 +1,90 @@
+<div class="span9">
+    <!-- Dropdowns -->
+
+    <section id="releaseTask">
+        <div class="page-header">
+            <h1>基本信息</h1>
+        </div>
+        <div class="row">
+            <div class="span5">
+                <span>密码管理：<a href="javascript:main.navigation.resetPwd()">密码修改</a>&nbsp;&nbsp;用户ID:<span id="userId">212121</span></span>　　
+            </div>
+            　
+            <div class="bs-docs-example">
+                <div id="bindstoreinfo">
+
+                </div>
+
+                <hr/>
+                <a class="striking" id="addbindstore" href="javascript:void(0)">+ 增加绑定店铺</a>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+<script type="text/javascript">
+
+    loads(loaderHandler.loaders.bootstrapDocs);
+
+    var refrash = function(){
+        main.post(main.action.bindShop,{},function(rep){
+            FormUtil.createTab('bindstoreinfo', main.accountInfo.title, rep.singleResult);
+        });
+    }
+
+    $(document).ready(function () {
+        refrash();
+
+        $('#windowContent').load(main.modules.accountInfo.content, function(){
+            //加载所有的省份
+            main.get(main.action.getProvinceList, {},function(data){
+                $("#provinces").html("<option value=''>请选择省份</option>");
+                $.each(data.singleResult, function(i, item) {
+                    $("#provinces").append("<option value='" + item.id + "'>" + item.name + "</option>");
+                });
+            });
+
+            $("#provinces").change(function(e) {
+                main.get(main.action.getCityList, {"provinceId" : e.target.value}, function(data){
+                    $("#citys").html("<option value=''>请选择市</option>");
+                    $.each(data.singleResult, function(i, item) {
+                        $("#citys").append("<option value='" + item.id + "'>" + item.name + "</option>");
+                    });
+                });
+            });
+
+            $("#citys").change(function(e) {
+                main.get(main.action.getCityList, {"cityId" : e.target.value}, function(data){
+                    $("#countys").html("<option value=''>请选择县</option>");
+                    $.each(data.singleResult, function(i, item) {
+                        $("#countys").append("<option value='" + item.id + "'>" + item.name + "</option>");
+                    });
+                });
+            });
+
+            $('#addbindstore').on('click', function(){
+                $jq('#window').window('open');
+            });
+
+            $('#submitbtn').on('click', function(){
+                main.post(main.action.bindShop, DataUtil.getRsJson(['shopname','shopurl','tbuser','provinces','citys','countys']), function(rep){
+                    if(rep.code == 0){
+                        main.alert.message('添加店铺成功！');
+                        FormUtil.createTab('bindstoreinfo', main.accountInfo.title, rep.singleResult);
+                        $jq('#window').window('close');
+                    }else{
+                        maim.alert.error(rep.message);
+                    }
+                });
+            });
+
+            $('#cancelbtn').on('click', function(){
+                $jq('#window').window('close');
+            });
+
+        });
+    });
+
+</script>
+

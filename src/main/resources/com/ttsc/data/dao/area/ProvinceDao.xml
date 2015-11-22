@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ttsc.data.dao.area.ProvinceDao">
+
+    <select id="getTownList" resultType="ProvinceInfo">
+        select 
+        	serialId id,
+        	concat(IFNULL(provinceName,''),IFNULL(provinceType,'')) provinceName 
+        from 
+        	fch_province
+    </select>
+    
+</mapper>
