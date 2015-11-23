@@ -273,7 +273,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>order</finalName>
+		<finalName>ROOT</finalName>
         <filters>
             <filter>${filter.file}</filter>
         </filters>

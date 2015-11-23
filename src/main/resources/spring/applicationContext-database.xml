@@ -32,7 +32,7 @@
 
   	<bean id="querySqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
    	 	<property name="dataSource" ref="querySource" />
-    	<property name="typeAliasesPackage" value="com.ttsc.data.entity"/>
+    	<property name="typeAliasesPackage" value="com.ttsc.data.entity,com.ttsc.data.po"/>
     	<property name="configLocation" value="classpath:mybatis-setting.xml"/>
  	</bean>
 	

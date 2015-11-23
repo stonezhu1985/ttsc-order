@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ttsc.data.dao.notice.NoticeInfoDao">
+    
+    <select id="getNoticeById" parameterType="int"  resultType="NoticeInfo">
+        select 
+        	id,title,content,notice_type type,date_format(notice_time,'%Y-%m-%d %H:%i:%s') noticeTime
+ 		from  
+ 			notice 
+        where 
+        	id = #{id}
+    </select>
+    
+    <select id="queryList" parameterType="NoticeQueryPo" resultType="NoticeInfo">
+        select 
+        	id,title,notice_type type,date_format(notice_time,'%Y-%m-%d %H:%i:%s') noticeTime
+ 		from  
+ 			notice 
+        where notice_type = 0
+        order by notice_time desc limit #{start},#{pageSize}
+    </select>
+    
+    <select id="queryListCount" parameterType="NoticeQueryPo" resultType="int">
+        select 
+        	count(1) totalNum
+        from  
+ 			notice 
+        where notice_type = 0
+    </select>
+    
+</mapper>
