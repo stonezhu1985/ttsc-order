@@ -72,6 +72,10 @@
         //$('#container').load(main.modules.accountInfo.container);
 
         $(document).ready(function() {
+            var data = CacheUtils.getLocalStorageData('accountInfo');
+            if(data){
+                DataUtil.setVal('telephone', data.telephone);
+            }
             $('#form').validator({
                 rules: main.validator,
                 timely: 2,
