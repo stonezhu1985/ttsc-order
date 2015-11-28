@@ -1,4 +1,4 @@
-package com.ttsc.data.action.account.task;
+package com.ttsc.data.action.task;
 
 import java.util.Date;
 import java.util.List;
