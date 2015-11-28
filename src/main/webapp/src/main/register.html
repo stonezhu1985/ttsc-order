@@ -29,7 +29,7 @@
                             <input type="text" class="form-control" name="phoneValidCode" id="phoneValidCode"/>
                         </div>
                         <div class="col-lg-3">
-                            <button class="btn btn-info" id="getPhoneValidCode" disabled="true">获取手机验证码</button>
+                            <input id="getPhoneValidCode" class="btn btn-info"  type="button" value="获取手机验证码" />
                         </div>
                     </div>
 
@@ -48,6 +48,7 @@
                         <div class="col-lg-5">
                             <input type="text" class="form-control" name="invitationCode" />
                         </div>
+                        <label class="col-lg-3">非必填</label>
                     </div>
 
                     <div class="form-group">
@@ -190,8 +191,9 @@ loads(['bootstrapGrowl', 'bootstrapValidator', 'base', 'md5'], function() {
         var getPhoneValidCode = function(e){
             if(e.target.id === 'getPhoneValidCode'){
                 disableSubmitButtons(e);
+                FormUtil.setInterval('getPhoneValidCode');
                 main.post(main.action.getPhoneValidCode, {"telephone" : DataUtil.getVal("telephone")}, function(rep){
-                    main.ajaxMsg(rep);
+                    //main.ajaxMsg(rep);
                 })
             }
         }
@@ -202,6 +204,7 @@ loads(['bootstrapGrowl', 'bootstrapValidator', 'base', 'md5'], function() {
             para["surePwd"] = hex_md5(DataUtil.getVal('surePwd'));
             para["password"] = hex_md5(DataUtil.getVal('password'));
             main.post(main.action.registAccount, para, function(rep){
+                CacheUtils.setLocalStorageData({telephone : DataUtil.getVal('telephone')}, 'accountInfo');
                 main.ajaxMsg(rep, main.herf.login);
             })
         }

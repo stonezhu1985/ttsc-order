@@ -88,9 +88,36 @@ String.prototype.toArray = function(a){
     return arr;
 };
 
-
-main.alert = {};
-main.log = {};
+/**
+ * 提示信息
+ * @param content
+ * @param param
+ */
+main.alert = {
+    message : function(content, param){
+        $.bootstrapGrowl(content, param);
+    },
+    success : function(content){
+        main.alert.message(content,  { type: 'success' });
+    },
+    error : function(content){
+        main.alert.message(content,  { type: 'danger' });
+    },
+    showSuccess : function(content){
+        FormUtil.showOverlay('show');
+        main.alert.message(content,  { type: 'success' });
+        setTimeout(function() {
+            FormUtil.showOverlay('hide');
+        }, 3000);
+    },
+    showError : function(content){
+        FormUtil.showOverlay('show');
+        main.alert.message(content,  { type: 'danger' });
+        setTimeout(function() {
+            FormUtil.showOverlay('hide');
+        }, 3000);
+    }
+};
 
 main.log = function(){
     if(main.dev){
@@ -131,24 +158,7 @@ main.error = function(){
     }
 }
 
-/**
- * 提示信息
- * @param content
- * @param param
- */
-main.alert.message = function(content, param){
-    setTimeout(function() {
-        $.bootstrapGrowl(content, param);
-    }, 1000);
-}
 
-main.alert.success = function(content){
-    this.message(content,  { type: 'success' });
-}
-
-main.alert.error = function(content){
-    this.message(content,  { type: 'danger' });
-}
 
 main.toUrl = function(url){
     window.location.href = main.base_url + url;
@@ -157,7 +167,7 @@ main.toUrl = function(url){
 main.ajaxMsg = function(rep, url){
     if(rep && rep.code == 0){
         if(rep.message){
-            main.alert.success(rep.message);
+            main.alert.showSuccess(rep.message);
         }
         if(url){
             setTimeout(function(){
@@ -166,7 +176,7 @@ main.ajaxMsg = function(rep, url){
         }
     }else if(rep && rep.code == 1){
         if(rep.message){
-            main.alert.error(rep.message);
+            main.alert.showSuccess(rep.message);
         }
     }
 }
@@ -296,7 +306,7 @@ for(var i = 0, c; c = DataUtil.is.types[i ++ ]; ){
 }
 
 DataUtil.getVal = function(nd){
-    var obj = $("#" + nd), type;
+    var obj = $("#" + nd);
     try{
         if(obj && obj.length > 0){
             return gitSwitch(obj[0]);
@@ -334,6 +344,42 @@ DataUtil.getRsJson = function(arr){
     })
     return json;
 }
+
+DataUtil.setVal = function(nd, val){
+    var obj = $("#" + nd);
+    try{
+        if(obj && obj.length > 0){
+            gitSwitch(obj[0]);
+        }else{
+            gitSwitch(document.getElementsByName(nd)[0]);
+        }
+    }catch(e){
+        main.error(nd + 'is no exsit!!');
+    }
+
+    function gitSwitch(obj){
+        switch(obj.type.toLowerCase()){
+            case 'checkbox' : ''
+                break;
+            case 'radio' :
+                break;
+            case 'text' : obj.value = val;;
+                break;
+            case 'password' : ''
+                break;
+            case 'select-one' :''
+                break;
+            case 'select-multiple':''
+                break;
+        }
+    }
+}
+
+DataUtil.setVals = function(){
+
+}
+
+
 
 /**
  * 获取URL参数
@@ -464,7 +510,66 @@ FormUtil.initRadios4Local = function(localStorageCode){
     FormUtil.initRadios(CacheUtils.getLocalStorageData(localStorageCode));
 }
 
-/****************************** Radio end ******************************/
+/****************************** form end ***************************************/
+
+/**
+ * 设置一个遮罩层
+ */
+FormUtil.showOverlay = function(type){
+    if(!$('#FormUtil_showOverlay')[0]){
+        var obj = $('<div id=\"FormUtil_showOverlay\"></div>').appendTo('body').css({
+            'position' : 'fixed',
+            'top': '0',
+            'left': '0',
+            'width': '100%',
+            'height': '100%',
+            'z-index': '9002',
+            'background': '#000',
+            'opacity': '0.5',
+            'display': 'none'
+        });
+    };
+
+    switch(type){
+        case 'show' : $('#FormUtil_showOverlay').css('display', 'block');
+            break;
+        case 'hide' : $('#FormUtil_showOverlay').css('display', 'none');
+            break;
+    };
+};
+
+/**
+ * 验证码倒计时
+ * @param id
+ */
+FormUtil.setInterval = function(id){
+    var InterValObj; //timer变量，控制时间
+    var count = 10; //间隔函数，1秒执行
+    var curCount;//当前剩余秒数
+    var id = "#" + id;
+
+    function sendMessage() {
+        curCount = count;
+        //设置button效果，开始计时
+        $(id).attr("disabled", "true");
+        $(id).val(curCount + "秒后可重新发送");
+        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+    }
+
+    //timer处理函数
+    function SetRemainTime() {
+        if (curCount == 0) {
+            window.clearInterval(InterValObj);//停止计时器
+            $(id).removeAttr("disabled");//启用按钮
+            $(id).val("重新发送验证码");
+        } else {
+            curCount--;
+            $(id).val(curCount + "秒后可重新发送");
+        }
+    }
+
+    sendMessage(id);
+}
 
 /****************************** 根据传参批量设置 bin ******************************/
 /**	type:
