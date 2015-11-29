@@ -17,14 +17,12 @@ public class TaskSpecifyDetailServiceImpl implements TaskSpecifyDetailService {
 	
 	@Override
 	public List<TaskSpecifyDetail> getTaskSpecifyDetailByTaskId(int taskId) {
-		// TODO Auto-generated method stub
-		return null;
+		return taskSpecifyDetailDao.getTaskSpecifyDetailByTaskId(taskId);
 	}
 
 	@Override
 	public void save(TaskSpecifyDetail taskSpecifyDetail) {
-		// TODO Auto-generated method stub
-
+		taskSpecifyDetailDao.save(taskSpecifyDetail);
 	}
 
 }

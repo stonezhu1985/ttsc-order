@@ -4,28 +4,28 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ttsc.data.dao.task.TaskKeyWordDetailDao">
 
-    <select id="getTaskAdditionalProductDetailByTaskId" parameterType="int" resultType="TaskAdditionalProductDetail">
+    <select id="getTaskKeyWordDetailByTaskId" parameterType="int" resultType="TaskKeyWordDetail">
         select 
         	id id,
-        	commodity_photo commodityPhoto,
-        	commodity_href commodityHref,
-        	commodity_price commodityPrice,
-        	commodity_order_num commodityOorderNum,
+        	key_word keyWord,
+        	order_num orderNum,
+        	rate rate,
+        	b_c_purchase_num bcPurchaseNum,
         	task_id taskId
         from 
-        	task_additional_product_detail 
+        	task_key_word_detail 
         where  
         	task_id = #{taskId}
     </select>
     
-    <insert id="saveTaskAdditionalProductDetail" parameterType="TaskAdditionalProductDetail">
+    <insert id="saveTaskKeyWordDetail" parameterType="TaskKeyWordDetail">
 		 insert into
-		 task_additional_product_detail(commodity_photo,
-        	commodity_href ,
-        	commodity_price ,
-        	commodity_order_num ,
+		 task_key_word_detail(key_word,
+        	order_num ,
+        	rate ,
+        	b_c_purchase_num ,
         	task_id) 
-		 values(#{commodityPhoto},#{commodityHref},#{commodityPrice},#{commodityOorderNum},
+		 values(#{keyWord},#{orderNum},#{rate},#{bcPurchaseNum},
 		 #{taskId})
 	</insert>
 	

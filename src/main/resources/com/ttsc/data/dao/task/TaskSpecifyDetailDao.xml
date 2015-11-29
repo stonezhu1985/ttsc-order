@@ -21,15 +21,15 @@
         	task_id = #{taskId}
     </select>
     
-    <insert id="saveTaskSpecifyDetail" parameterType="TaskSpecifyDetail">
+    <insert id="save" parameterType="TaskSpecifyDetail">
 		 insert into
 		 task_specify_detail(type,
         	first ,
         	second ,
         	third ,
         	four,
-        	five five,
-        	praise praise,
+        	five,
+        	praise,
         	task_id) 
 		 values(#{type},#{first},#{second},#{third},#{four},#{five},#{praise},
 		 #{taskId})
