@@ -24,11 +24,11 @@ public class Task {
 	private int maxPrice;
 	//商品最小金额
 	private int minPrice;
-	//是否包邮
+	//是否包邮：1，包邮；0，不包邮
 	private int freeShipping;
 	//商品单价
 	private int commodityPrice;
-	//订单含有商品的个数:是否包邮：1，包邮；0，不包邮
+	//订单含有商品的个数
 	private int orderHaveCommodityNum;
 	//是否是直通车任务：0，不是；1，是
 	private int isStraightTrainTask;

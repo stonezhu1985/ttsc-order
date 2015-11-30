@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ttsc.data.dao.task.TaskShowOrderTimeDetailDao">
+
+    <select id="getTaskShowOrderTimeDetailByTaskId" parameterType="int" resultType="TaskShowOrderTimeDetail">
+        select 
+        	id,startTime,endTime,orderNum,task_id taskId,
+        from 
+        	task_show_order_time_detail 
+        where  
+        	task_id = #{taskId}
+    </select>
+    
+    <insert id="save" parameterType="TaskShowOrderTimeDetail">
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		 insert into
+		 task_show_order_time_detail(startTime,
+        	endTime ,
+        	orderNum ,
+        	task_id ) 
+		 values(#{startTime},#{endTime},#{orderNum},#{taskId})
+	</insert>
+	
+</mapper>

@@ -6,6 +6,7 @@ import com.ttsc.data.entity.task.Task;
 import com.ttsc.data.entity.task.TaskAdditionalProductDetail;
 import com.ttsc.data.entity.task.TaskEmptyPacketServiceDetail;
 import com.ttsc.data.entity.task.TaskKeyWordDetail;
+import com.ttsc.data.entity.task.TaskShowOrderTimeDetail;
 import com.ttsc.data.entity.task.TaskSpecifyDetail;
 
 public class TaskForm {
@@ -14,6 +15,7 @@ public class TaskForm {
 	private TaskEmptyPacketServiceDetail taskEmptyPacketServiceDetail;// 空包服务
 	private List<TaskKeyWordDetail> taskKeyWordDetailList;// 关键字
 	private List<TaskSpecifyDetail> taskSpecifyDetailList;// 指定好评
+	private List<TaskShowOrderTimeDetail> taskShowOrderTimeDetailList;//放单时间
 
 	public Task getTask() {
 		return task;
@@ -57,5 +59,14 @@ public class TaskForm {
 	public void setTaskSpecifyDetailList(
 			List<TaskSpecifyDetail> taskSpecifyDetailList) {
 		this.taskSpecifyDetailList = taskSpecifyDetailList;
+	}
+
+	public List<TaskShowOrderTimeDetail> getTaskShowOrderTimeDetailList() {
+		return taskShowOrderTimeDetailList;
+	}
+
+	public void setTaskShowOrderTimeDetailList(
+			List<TaskShowOrderTimeDetail> taskShowOrderTimeDetailList) {
+		this.taskShowOrderTimeDetailList = taskShowOrderTimeDetailList;
 	}
 }

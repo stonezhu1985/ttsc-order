@@ -23,6 +23,7 @@ import com.ttsc.data.entity.task.Task;
 import com.ttsc.data.entity.task.TaskAdditionalProductDetail;
 import com.ttsc.data.entity.task.TaskEmptyPacketServiceDetail;
 import com.ttsc.data.entity.task.TaskKeyWordDetail;
+import com.ttsc.data.entity.task.TaskShowOrderTimeDetail;
 import com.ttsc.data.entity.task.TaskSpecifyDetail;
 import com.ttsc.data.po.TaskForm;
 import com.ttsc.data.result.BasicResult;
@@ -31,6 +32,7 @@ import com.ttsc.data.service.task.TaskAdditionalProductDetailService;
 import com.ttsc.data.service.task.TaskEmptyPacketServiceDetailService;
 import com.ttsc.data.service.task.TaskKeyWordDetailService;
 import com.ttsc.data.service.task.TaskService;
+import com.ttsc.data.service.task.TaskShowOrderTimeDetailService;
 import com.ttsc.data.service.task.TaskSpecifyDetailService;
 import com.ttsc.data.util.Base64Util;
 import com.ttsc.data.util.Constant;
@@ -66,6 +68,9 @@ public class TaskController extends BaseController {
 	@Autowired
 	private TaskSpecifyDetailService taskSpecifyDetailService;
 	
+	@Autowired
+	private TaskShowOrderTimeDetailService taskShowOrderTimeDetailService;
+	
 	@RequestMapping(value = "saveTask", method=RequestMethod.POST, headers = {"content-type=application/json","content-type=application/xml"})
 	@ResponseBody
 	public BasicResult<String> saveTask(HttpServletRequest request,@RequestBody TaskForm form) throws Exception {
@@ -85,6 +90,7 @@ public class TaskController extends BaseController {
 			TaskEmptyPacketServiceDetail taskEmptyPacketServiceDetail = form.getTaskEmptyPacketServiceDetail();// 空包服务
 			List<TaskKeyWordDetail> taskKeyWordDetailList = form.getTaskKeyWordDetailList();// 关键字
 			List<TaskSpecifyDetail> taskSpecifyDetailList = form.getTaskSpecifyDetailList();// 指定好评
+			List<TaskShowOrderTimeDetail> taskShowOrderTimeDetailList = form.getTaskShowOrderTimeDetailList();//放单时间
 			
 
 			String photoName = this.changeImage(userId, task.getCommodityPhoto());
@@ -150,6 +156,16 @@ public class TaskController extends BaseController {
 						}
 					}
 					taskSpecifyDetailService.save(taskSpecifyDetail);
+				}
+			}
+			
+			//放单时间
+			if(taskShowOrderTimeDetailList != null && taskShowOrderTimeDetailList.size()>0){
+				TaskShowOrderTimeDetail taskShowOrderTimeDetail = null;
+				for(int i =0;i<taskShowOrderTimeDetailList.size();i++){
+					taskShowOrderTimeDetail = taskShowOrderTimeDetailList.get(i);
+					taskShowOrderTimeDetail.setTaskId(taskId);
+					taskShowOrderTimeDetailService.save(taskShowOrderTimeDetail);
 				}
 			}
 			
