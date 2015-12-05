@@ -17,4 +17,11 @@ public interface ProvinceService {
 	 * @return
 	 */
 	public List<ProvinceInfo> getProvinceList();
+	
+	/**
+	 * 根据区域Id获取省份信息列表
+	 * @param areaId
+	 * @return
+	 */
+	public List<ProvinceInfo> getProvinceListByAreaId(int areaId);
 }

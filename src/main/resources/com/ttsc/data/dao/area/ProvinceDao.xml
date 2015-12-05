@@ -12,4 +12,12 @@
         	fch_province
     </select>
     
+    <select id="getProvinceListByAreaId" resultType="ProvinceInfo">
+        select 
+        	serialId id,
+        	provinceName 
+        from 
+        	fch_province where areaId=#{areaId}
+    </select>
+    
 </mapper>

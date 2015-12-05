@@ -19,4 +19,9 @@ public class ProvinceServiceImpl implements ProvinceService {
 		return provinceDao.getProvinceList();
 	}
 
+	@Override
+	public List<ProvinceInfo> getProvinceListByAreaId(int areaId) {
+		return provinceDao.getProvinceListByAreaId(areaId);
+	}
+
 }
